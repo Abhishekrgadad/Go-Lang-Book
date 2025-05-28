@@ -20,8 +20,7 @@ source ~/.bashrc
 
 go version
 
-
-*For Windows
+**For Windows
 
 Download the Go installer
 
@@ -34,32 +33,19 @@ Click Environment Variables.
 Under System Variables, find Path and edit.
 Add: C:\Go\bin and %USERPROFILE%\go\bin
 Verify Installation
-
-powershell
-copy and paste below command
-
 go version
-For macOS (Using Homebrew)
+
+**For macOS (Using Homebrew)
 Install Go:
-
-
 brew install go
 Set Path:
-
-bash
-Copy
-Edit
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
 echo 'export GOPATH=$HOME/go' >> ~/.zshrc
 echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.zshrc
 source ~/.zshrc
 Verify Installation
 
-bash
-Copy
-Edit
 go version
-
 
 Now you're all set to use Go! 🚀
 
