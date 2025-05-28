@@ -16,6 +16,7 @@ This documentation is inspired by _Go Programming_ by Alan A. A. Donovan & Brian
     - [Variables & Types](#variables--types)
     - [Control Structures](#control-structures)
     - [Functions](#functions)
+    - [Methods](#methods)
     - [Packages & Imports](#packages--imports)
 4. [Intermediate Go](#intermediate-go)
     - [Arrays, Slices & Maps](#arrays-slices--maps)
@@ -229,12 +230,14 @@ Method is a function with Special receiver argument. Methods allow us to associa
 Receiver: The variable to which the method is bound.It can be a value or pointer.
 Type: The type the method is associated with (usually a struct).
 
-- Syntax:
+**Syntax**
+```go
 func (receiver Type) MethodName(params) returnType {
     // method body
 }
+```
 
-- Example:
+**Examples**
 ```go
 package main
 import "fmt"
