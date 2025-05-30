@@ -266,7 +266,7 @@ func main() {
 }
 ```
 
-**Pass by Value**
+**Pass by Value:**
 The function argumnets are copied and passed to other methods. if any changes in the other functions won't affect the original values
 ```go
 func increment(x int) {
@@ -274,13 +274,13 @@ func increment(x int) {
 }
 
 func main() {
-    a := 10
+    a := 10 
     increment(a)
     fmt.Println(a) // Output: 10
 }
 ```
 
-**Pass by Reference**
+**Pass by Reference:**
 The function which pass the address or memory location for the other functions using pointers. if there any change in other functions will affect the original values.
 ```go
 func incrementPtr(x *int) {
@@ -294,7 +294,7 @@ func main() {
 }
 ```
 
-**Function Chaining**
+**Function Chaining:**
 Function chaining is a technique where multiple method calls are linked together in a single statement.in other sense the output of the one function is taken as input to next function.
 ```go
 package main
@@ -323,7 +323,7 @@ func main() {
     fmt.Println(c.value) // Output: 17
 }
 ```
-**Defer Function**
+**Defer Function:**
 The defer statement in go is used to schedule a function call to be run after the function completes,just before it returns. Deferred functions are often used for cleanup tasks, such as closing files or releasing resources.
 ```go
 package main
@@ -359,12 +359,79 @@ defer file.Close()
 | Map    | Unordered collection of key-value pairs.          |
 
 ### Structs & Methods
+A structure in Go is a composite data type that groups together zero or more fields with varying data types under a single name.
+- Define a struct 
+```go
+type Person struct {
+    Name string
+    Age  int
+}
+```
+- creating and using structs
+```go
+func main() {
+    p := Person{Name: "Alice", Age: 30}
+    fmt.Println(p.Name) // Output: Alice
+    fmt.Println(p.Age)  // Output: 30
 
-- Define custom types and attach methods.
+    p.Age = 31
+    fmt.Println(p.Age) // Output: 31
+}
+```
+**Custom types:**
+You can define your own custom types using the type keyword.Custom types help make your code more readable,type-safe and organized.
+```go
+type Age int
+var myAge Age = 30
+
+type Person struct {
+    Name string
+    Age  int
+}
+
+var p Person = Person{Name: "Alice", Age: 25}
+```
 
 ### Interfaces
 
-- Achieve polymorphism.
+An interface in Go is a type that specifies set of method signatures(behavior).but does not provide implementations. Any type that implements those methods satisfies the interface no explicit declaration is needed.
+```go
+package main
+
+import "fmt"
+
+type Shape interface {
+    Area() float64
+}
+
+type Rectangle struct {
+    Width, Height float64
+}
+
+func (r Rectangle) Area() float64 {
+    return r.Width * r.Height
+}
+
+func printArea(s Shape) {
+    fmt.Println("Area:", s.Area())
+}
+
+func main() {
+    rect := Rectangle{Width: 4, Height: 3}
+    printArea(rect)
+}
+```
+**Empty Interface:**
+The empty interface (inteface{}) in Go can hold values of any type because it has zero methods. it is used when you need a variable,function parameter,or return value that can accept any type.
+```go
+func describe(i interface{}) {
+    fmt.Printf("Type: %T, Value: %v\n", i, i)
+}
+
+describe(42)        
+describe("hello")    
+describe([]int{1,2}) 
+```
 
 ### Error Handling
 
