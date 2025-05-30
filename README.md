@@ -224,7 +224,7 @@ func functionName(parameters) returnType {
         return result
     }
     ```
-
+---
 ### Methods
 Method is a function with Special receiver argument. Methods allow us to associate function with specific types.
 Receiver: The variable to which the method is bound.It can be a value or pointer.
@@ -264,6 +264,87 @@ func main() {
     fmt.Println("Scaled Rectangle:", rect)
     fmt.Println("New Area:", rect.Area())
 }
+```
+
+**Pass by Value**
+The function argumnets are copied and passed to other methods. if any changes in the other functions won't affect the original values
+```go
+func increment(x int) {
+    x = x + 1
+}
+
+func main() {
+    a := 10
+    increment(a)
+    fmt.Println(a) // Output: 10
+}
+```
+
+**Pass by Reference**
+The function which pass the address or memory location for the other functions using pointers. if there any change in other functions will affect the original values.
+```go
+func incrementPtr(x *int) {
+    *x = *x + 1
+}
+
+func main() {
+    a := 10
+    incrementPtr(&a)
+    fmt.Println(a) // Output: 11
+}
+```
+
+**Function Chaining**
+Function chaining is a technique where multiple method calls are linked together in a single statement.in other sense the output of the one function is taken as input to next function.
+```go
+package main
+
+import (
+    "fmt"
+)
+
+type Counter struct {
+    value int
+}
+
+func (c *Counter) Add(n int) *Counter {
+    c.value += n
+    return c
+}
+
+func (c *Counter) Multiply(n int) *Counter {
+    c.value *= n
+    return c
+}
+
+func main() {
+    c := &Counter{}
+    c.Add(5).Multiply(3).Add(2)
+    fmt.Println(c.value) // Output: 17
+}
+```
+**Defer Function**
+The defer statement in go is used to schedule a function call to be run after the function completes,just before it returns. Deferred functions are often used for cleanup tasks, such as closing files or releasing resources.
+```go
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    fmt.Println("Start")
+    defer fmt.Println("Deferred: This runs last")
+    fmt.Println("End")
+}
+```
+Also in such cases:
+```go
+file, err := os.Open("data.txt")
+if err != nil {
+    log.Fatal(err)
+}
+defer file.Close()
 ```
 ---
 
