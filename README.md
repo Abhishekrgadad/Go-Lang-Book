@@ -351,13 +351,43 @@ defer file.Close()
 ## Intermediate Go
 
 ### Arrays, Slices & Maps
+Go provides three primary data structures for storing collections of data: arrays,slices and maps. Each serves a different purpose and has unique characteristics.
 
-| Type   | Description                                      |
-|--------|--------------------------------------------------|
-| Array  | Fixed-size collection of elements of same type.   |
-| Slice  | Dynamic-size, flexible view into arrays.          |
-| Map    | Unordered collection of key-value pairs.          |
+| Feature           | Arrays                             | Slices                                  | Maps                                      |
+|------------------|-------------------------------------|------------------------------------------|-------------------------------------------|
+| Declaration      | `var arr [3]int`                    | `var s []int` or `make([]int, len)`     | `var m map[string]int` or `make(map[string]int)` |
+| Size             | Fixed at compile time               | Dynamic, can grow or shrink             | Dynamic                                   |
+| Backing Data     | Has its own memory                  | Backed by an array                      | Has its own internal hash table           |
+| Indexing         | By integer index                    | By integer index                        | By key (can be string, int, etc.)         |
+| Modifiable       | Yes                                 | Yes                                     | Yes                                       |
+| Length Access    | `len(arr)`                          | `len(slice)`                            | `len(map)` (number of key-value pairs)    |
+| Capacity         | Not applicable                      | `cap(slice)` gives capacity             | Not applicable                            |
+| Key Type         | Not applicable                      | Not applicable                          | Can be almost any comparable type         |
+| Value Type       | All elements must be same type      | All elements must be same type          | All values must be same type              |
+| Use Case         | Fixed-size collections              | Flexible sequences                      | Key-value data storage                    |
 
+
+- Array Ex:
+```go
+var a [3]int
+a[0] = 10
+a[1] = 20
+a[2] = 30
+fmt.Println(a) // Output: [10 20 30]
+```
+- Slice Ex:
+```go
+b := []int{1, 2, 3}
+b = append(b, 4)
+fmt.Println(b) // Output: [1 2 3 4]
+```
+- Map Ex:
+```go
+m := map[string]int{"apple": 5, "banana": 3}
+m["orange"] = 7
+fmt.Println(m) // Output: map[apple:5 banana:3 orange:7]
+```
+---
 ### Structs & Methods
 A structure in Go is a composite data type that groups together zero or more fields with varying data types under a single name.
 - Define a struct 
@@ -391,7 +421,7 @@ type Person struct {
 
 var p Person = Person{Name: "Alice", Age: 25}
 ```
-
+---
 ### Interfaces
 
 An interface in Go is a type that specifies set of method signatures(behavior).but does not provide implementations. Any type that implements those methods satisfies the interface no explicit declaration is needed.
@@ -432,7 +462,7 @@ describe(42)
 describe("hello")    
 describe([]int{1,2}) 
 ```
-
+---
 ### Error Handling
 
 - Idiomatic error handling using `error` type.
